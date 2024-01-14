@@ -1,10 +1,78 @@
 createHtml();
+const PAD_WIDTH = 500;
+addGrid();
+let shadeValue = 0;
+let color = getColor();
+
 
 
 function addGrid()
 {
+    let n = document.querySelector('#sizeRange').value;
+    let size = PAD_WIDTH / n;
+    n *= n;
     let container = document.querySelector('.gridContainer');
+    let i = 0;
+    for (i = 0; i < n; i++)
+    {
+        const grid = document.createElement('div');
+        grid.classList.add('grid');
+        grid.style.width = `${size}px`;
+        grid.style.height = `${size}px`;
+        grid.addEventListener('mouseover', () => {
+            grid.style.backgroundColor = getColor();
+        });
 
+        container.appendChild(grid);
+    }
+}
+
+function removeGrid() 
+{
+    let gridContainer = document.querySelector('.gridContainer');
+    let grid = document.querySelector('.grid');
+    while(grid)
+    {
+        gridContainer.removeChild(grid);
+        grid = document.querySelector('.grid');
+    }
+}
+
+function getColor()
+{
+    let option = getOption();
+
+    switch(option)
+    {
+        case 'Normal':
+            return document.querySelector('#colorPicker').value;
+        case 'Rainbow':
+            return rainbow();
+        default:
+            return shades(); 
+    }
+}
+
+function getOption()
+{
+    document.querySelectorAll('[name="drawingOption"]').forEach(function(opt) {
+        if (opt.checked)
+            o = opt.value.toString()});
+    return o;
+}
+
+function rainbow()
+{
+    let c = [];
+    for (let i = 0;  i < 3; i++)
+        c.push(Math.floor(Math.random() * 255));
+    return 'rgb(' + c.toString() + ')';
+}
+
+function shades()
+{
+    shadeValue = (shadeValue + 1) % 255;
+    return `rgb(${shadeValue}, ${shadeValue}, ${shadeValue})`;
 }
 
 function createHtml() 
@@ -70,6 +138,7 @@ function createHtml()
     sizeRange.setAttribute('id', 'sizeRange');
     sizeRange.setAttribute('min', '16');
     sizeRange.setAttribute('max', '64');
+    sizeRange.setAttribute('value', '16');
     
     const sizeLabel = document.createElement('label');
     sizeLabel.setAttribute('for', 'sizeRange');
@@ -77,14 +146,25 @@ function createHtml()
     
     sizeRange.addEventListener('input', () => {
         sizeLabel.textContent = `${sizeRange.value}x${sizeRange.value}`;
+        removeGrid();
+        addGrid();
     });
 
     resizeContainer.appendChild(sizeRange);
     resizeContainer.appendChild(sizeLabel);
 
+    const clearButton = document.createElement('div');
+    clearButton.classList.add('clearButton');
+    clearButton.textContent = 'Clear';
+    clearButton.addEventListener('click', () => {
+        removeGrid();
+        addGrid();
+    });
+
     paramContainer.appendChild(colorContainer);
     paramContainer.appendChild(optionContainer);
     paramContainer.appendChild(resizeContainer);
+    paramContainer.appendChild(clearButton);
     main.appendChild(paramContainer);
     main.appendChild(gridContainer);
 
