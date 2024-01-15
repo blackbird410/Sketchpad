@@ -71,7 +71,7 @@ function rainbow()
 
 function shades()
 {
-    shadeValue = (shadeValue + 1) % 255;
+    shadeValue = (shadeValue + 25) % 255;
     return `rgb(${shadeValue}, ${shadeValue}, ${shadeValue})`;
 }
 
@@ -103,7 +103,7 @@ function createHtml()
 
     // Header part
     headerLeft.textContent = 'SketchPad';
-    headerRight.textContent = 'ToggleButton';
+    headerRight.textContent = 'Neil Rigaud';
     header.appendChild(headerLeft);
     header.appendChild(headerRight);
 
