@@ -19,7 +19,7 @@ function addGrid()
         grid.classList.add('grid');
         grid.style.width = `${size}px`;
         grid.style.height = `${size}px`;
-        grid.addEventListener('mouseover', () => {
+        grid.addEventListener('mousemove', () => {
             grid.style.backgroundColor = getColor();
         });
 
@@ -79,33 +79,21 @@ function createHtml()
 {
     // Create the basic html structure
     const body = document.body;
-    const header = document.createElement('div');
     const main = document.createElement('div');
     const footer = document.createElement('div');
-    const headerLeft = document.createElement('div');
-    const headerRight = document.createElement('div');
     const paramContainer = document.createElement('div');
     const gridContainer = document.createElement('div');
     const colorContainer = document.createElement('div');
     const optionContainer = document.createElement('div');
     const resizeContainer = document.createElement('div');
 
-    header.classList.add('header', 'container');
     main.classList.add('main', 'container');
     footer.classList.add('footer', 'container');
-    headerLeft.classList.add('left');
-    headerRight.classList.add('right');
     paramContainer.classList.add('paramContainer', 'container', 'colContainer');
     gridContainer.classList.add('gridContainer', 'container');
     colorContainer.classList.add('colorContainer', 'container', 'colContainer');
     optionContainer.classList.add('optionContainer', 'container');
     resizeContainer.classList.add('resizeContainer', 'container', 'colContainer');
-
-    // Header part
-    headerLeft.textContent = 'SketchPad';
-    headerRight.textContent = 'Neil Rigaud';
-    header.appendChild(headerLeft);
-    header.appendChild(headerRight);
 
     // Main part
     const colorPicker = document.createElement('input');
@@ -175,7 +163,6 @@ function createHtml()
     link.textContent = 'Copyright \u00A9 Neil Taison Rigaud 2024';
     footer.appendChild(link);
 
-    body.append(header);
     body.append(main);
     body.append(footer);
 }

@@ -5,7 +5,6 @@ body {
     font-family: 'Roboto', 'Helvetica', 'Sans-serif';
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     margin: 0;
 }
@@ -21,20 +20,6 @@ body {
     flex-direction: column;
     justify-content: space-around;
     gap: 16px;
-}
-
-.header {
-    justify-content: space-between;
-    width: 100%;
-    background-color: gainsboro;
-    color: #19212C;
-}
-
-.left,
-.right {
-    padding: 0 16px;
-    font-size: 24px;
-    font-weight: 800;
 }
 
 .main {
@@ -84,6 +69,7 @@ body {
     width: 100%;
     justify-content: center;
     align-items: center;
+    padding: 0;
 }
 
 a {
